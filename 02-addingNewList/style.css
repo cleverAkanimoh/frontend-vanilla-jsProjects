@@ -1,0 +1,284 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+body {
+	background: linear-gradient(120deg, #c5a849, #df8e77);
+	color: white;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+		sans-serif;
+	min-height: 100vh;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+h1 {
+	background: linear-gradient(30deg, #c5a849, #df8e77);
+	font-size: 1.6rem;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	z-index: 3;
+}
+
+h1,
+form {
+	min-height: 20vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	background: linear-gradient(120deg, #c5a849, #df8e77);
+	font-size: 1.1rem;
+	position: fixed;
+	width: 100%;
+	top: 15%;
+	left: 50%;
+	transform: translate(-50%, -15%);
+	z-index: 3;
+}
+
+form input[type="text"] {
+	padding: 0.55rem;
+	border: none;
+	border-radius: 0.3rem 0 0 0.3rem;
+	background-color: white;
+	min-width: 35%;
+}
+
+form input[type="text"]:focus {
+	outline: 0;
+}
+
+[type="submit"] {
+	background: #d87054;
+    color: white;
+	font-size: 1.2rem;
+	font-weight: bolder;
+	padding: 0.3rem 0.5rem;
+	cursor: pointer;
+	transition: all 0.5s;
+	border: none;
+	border-radius: 0 0.3rem 0.3rem 0;
+    transition: all 0.6s ease-in;
+}
+
+[type="submit"]:hover{
+    background: white;
+    color: #d87054;
+}
+
+[type="submit"]:focus {
+	border: 2.5px solid #af5d47;
+	padding: 0.22rem 0.3rem;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 250px 0;
+}
+
+ul.todo-list {
+	list-style-type: none;
+	min-width: 50%;
+}
+
+ul div {
+	margin: 0.5rem;
+	/* padding: 0 0 0 1rem; */
+	font-size: 1.2rem;
+	border-radius: 0.25rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #ffff;
+}
+
+ul div li {
+	flex: 1;
+	font-size: 1.1rem;
+	font-weight: 500;
+	padding: 0 1rem 0 0.5rem;
+	color: black;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+ul div.completed {
+    transform: translateX(0.4rem);
+	opacity: 0.6;
+    transition: all 0.6s ease;
+
+}
+
+ul div.completed li {
+    text-decoration: line-through;
+}
+
+ul div.completed button.del-btn {
+    display: none;
+}
+
+ul div.completed button.check-btn {
+    border: 1px solid green;
+    border-radius: 0 0.25rem 0.25rem 0;
+	padding: 0.455rem 0.8rem;
+	background: rgba(0, 255, 0, 0.2);
+	color: green;
+}
+
+ul div button {
+	padding: 0.6rem 0.9rem;
+	background: #d33104;
+	border: 0;
+	border-radius: 0 0.25rem 0.25rem 0;
+	color: white;
+	font-size: 1rem;
+	transition: all 0.4s;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+ul div button:hover {
+	background: white;
+	color: #d87054;
+	font-weight: bolder !important;
+}
+
+ul div button.check-btn {
+	padding: 0.534rem 0.9rem;
+	background: green;
+	border-radius: 0;
+}
+
+ul div button.check-btn:hover {
+	color: green;
+	background: white;
+}
+
+.fall {
+	transform: translateX(5rem);
+	opacity: 0.4;
+}
+
+div.select {
+	margin: 1.5rem;
+	position: relative;
+	overflow: hidden;
+}
+
+/* div.select::after {
+	content: "Filter List";
+	background: #d87054;
+	padding: 0.55rem;
+	pointer-events: none;
+	border-radius: 0 0.3rem 0.3rem 0;
+} */
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	color: #d87054;
+	width: 8.5rem;
+	cursor: pointer;
+	padding: 0.55rem;
+	border-radius: 0.3rem;
+}
+
+div.visible .confirm-cancel {
+	display: flex !important;
+}
+
+.empty-btn {
+	background: #d87054;
+    color: white;
+	font-weight: bolder;
+	padding: 0.55rem;
+	cursor: pointer;
+	transition: all 0.5s;
+	border: none;
+	border-radius: 0 0.3rem ;
+    transition: all 0.6s ease-in;
+}
+
+.empty-btn:hover {
+	background-color: white;
+	color: #d87054;
+}
+
+.empty-btn:focus {
+	border: 2px solid #d87054;
+	opacity: 0.5;
+}
+
+.confirm-cancel{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 0rem 2rem 0.2rem;
+	display: none;
+	transition: all 0.5s ease;
+}
+
+.confirm-cancel p {
+	color: red;
+	background: rgba(255, 0, 0, 0.2);
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	border-left: 3px solid;
+	padding:0 0.5rem;
+}
+
+.confirm-cancel b {
+	color: rgb(240, 31, 31);
+	font-weight: normal;
+}
+
+.confirm-cancel em {
+	font-weight: bold;
+	font-style: normal;
+}
+
+.confirm-cancel i {
+	color:green;
+	font-style: normal;
+}
+
+.clear-btn {
+	color: white;
+	background: red;
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	outline: none;
+	border: 0;
+	border-radius: 0.3rem;
+	padding: 0.7rem 0;
+	width: 90px;
+	cursor: pointer;
+}
+.cancel-btn {
+	color: white;
+	background: green;
+	font-weight: bold;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	outline: none;
+	border: 0;
+	border-radius: 0.3rem;
+	padding: 0.7rem 0;
+	width: 90px;
+	cursor: pointer;
+	margin-left: 5px;
+}

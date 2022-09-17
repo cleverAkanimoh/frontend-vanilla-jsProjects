@@ -1,0 +1,427 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes hamm-normal {
+	from {
+		margin-bottom: -4px;
+	}
+	to {
+		margin-bottom: 4px;
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotateTop {
+	from {
+		transform: rotate(0deg);
+		margin-bottom: 4px;
+	}
+	50% {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(45deg);
+		margin-top: 6px;
+	}
+}
+
+@keyframes rotateBottom {
+	0% {
+		transform: rotate(0deg);
+		margin-bottom: 4px;
+	}
+	50% {
+		transform: rotate(-360deg);
+	}
+	100% {
+		transform: rotate(-45deg);
+		margin-top: -8px;
+	}
+}
+
+body {
+	background-color: black;
+	color: white;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+		sans-serif;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+.search-not-found {
+	padding: 1rem;
+	font-size: 1.15rem;
+	display: none;
+}
+
+.search-hidden {
+	display: none;
+}
+
+.fullwidth {
+	transition: all 0.6s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 60%;
+	padding: 20px 10px;
+	border-right: 2px solid white;
+	background: black;
+	transform: translate(-100%);
+	z-index: 7;
+}
+
+.main-display {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 257px;
+	padding: 20px 10px;
+	border-right: 1px solid white;
+	background-color: black;
+	z-index: 7;
+	transition: all 0.6s ease;
+}
+
+.completed .check-btn {
+	opacity: 0.6;
+}
+
+nav {
+	display: inline;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 70px;
+	background: black;
+	padding: 1rem 1.2rem;
+	z-index: 5;
+}
+
+.logo {
+	float: left;
+	margin-top: 3px;
+}
+
+.responsive {
+	width: 40%;
+	float: left;
+	margin-top: -5px;
+	height: auto;
+}
+
+nav div.hamm-div {
+	float: right;
+	padding: 0.2rem;
+	cursor: pointer;
+	margin-top: 10px;
+	animation: hamm-normal 0.6s;
+}
+
+nav div.hamm {
+	background: white;
+	width: 23px;
+	margin-bottom: 4px;
+	height: 4px;
+	pointer-events: none;
+	border: 0;
+	animation: hamm-normal 0.6s;
+}
+
+#checkk {
+	display: none;
+}
+
+#checkk:checked ~ .hamm.top {
+	animation: rotateTop 0.6s forwards;
+}
+#checkk:checked ~ .hamm.mid {
+	animation: rotateBottom 0.6s forwards;
+}
+#checkk:checked ~ .hamm.last {
+	animation: rotateBottom 0.6s forwards;
+}
+
+.fall {
+	transform: translateX(5rem);
+	opacity: 0.4;
+}
+
+h1 {
+	font-size: 1.6rem;
+	color: green;
+}
+
+h1,
+form {
+	min-height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form {
+	font-size: 1.1rem;
+	z-index: 3;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	margin-left: 4%;
+	grid-gap: 20px 0;
+}
+
+input::placeholder {
+	color: blue;
+	font-size: 0.9rem;
+}
+
+form input[type="text"],
+input[type="search"], .signup-main input  {
+	padding: 0.55rem;
+	border: none;
+	border-radius: 0.3rem;
+	background-color: white;
+	width: 100%;
+}
+
+form input[type="text"]:focus,
+input[type="search"]:focus, .signup-main input:focus {
+	outline: 0;
+	border: 2px solid blue;
+}
+
+[type="submit"] {
+	width: 50%;
+	background: green !important;
+	color: white ;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0.3rem 0 !important;
+	cursor: pointer;
+	border: none;
+	border-radius: 0 0.3rem;
+	transition: all 0.5s ease;
+	margin-left: 20%;
+}
+
+[type="submit"]:hover {
+	background: white !important;
+	color: green !important;
+}
+
+[type="submit"]:focus {
+	border: 2.5px solid green;
+	padding: 0.22rem 0.3rem;
+}
+
+.container {
+	width: 100%;
+	position: relative;
+	overflow-x: hidden;
+	margin-top: 17vh;
+}
+
+div.select {
+	padding-right: 5px;
+	position: absolute;
+	overflow: hidden;
+	right: 0;
+}
+
+div.select::after {
+	content: "Filter";
+	background: green;
+	padding: 0.55rem;
+	pointer-events: none;
+	border-radius: 0 0.3rem 0.3rem 0;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
+	border: none;
+	color: green;
+	width: 8rem;
+	cursor: pointer;
+	padding: 0.55rem;
+	border-radius: 0.3rem;
+}
+
+.container h2 {
+	position: relative;
+	text-align: center;
+}
+
+table {
+	position: relative;
+	width: 100%;
+	overflow-x: auto;
+	padding: 1rem;
+}
+
+.table-hidden {
+	display: none;
+}
+
+table th {
+	text-align: center;
+	padding: 1rem 0rem;
+	color: green;
+}
+
+table tr.table-row:nth-child(odd) {
+	background-color: #333;
+}
+
+@keyframes underline {
+	from {
+		transform: translate(-100%);
+	}
+	to {
+		transform: translate(0%);
+	}
+}
+
+table td {
+	text-align: center;
+	border-bottom: 1px solid dodgerblue;
+	animation: underline 0.5s;
+}
+
+.logout {
+	position: absolute;
+	bottom: 12%;
+	width: fit-content;
+	padding: 0.7rem 1rem;
+	border: 1px solid green;
+	box-shadow: 1px 1px 1px 1px black;
+}
+
+.logout:link, .logout:visited{
+	color: green;
+	font-weight: bold;
+	border-radius: 0.55rem;
+	text-decoration: none;
+}
+
+.logout:hover, .logout:active{
+	color: white;
+	background: green;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 0.75rem;
+	transition: all 0.5s;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	padding: 0 0 1rem;
+}
+
+@media screen and (min-width: 1036px) {
+	nav {
+		display: none;
+	}
+	.fullwidth,
+	.main-display {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 20%;
+		padding: 20px 10px;
+		border-right: 2px solid white;
+		transform: translate(0%);
+		transition: none;
+	}
+
+	.container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 80%;
+		margin-top: 0vh;
+		padding: 0.7rem;
+	}
+
+	.container h2 {
+		padding: 3rem 0;
+		font-size: 2rem;
+	}
+
+	div.select {
+		padding-right: 5px;
+		position: absolute;
+		overflow: hidden;
+		top: 3%;
+		right: 3%;
+		z-index: 6;
+	}
+}
+
+
+.signup-main {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.signup-main h1 {
+	font-size: 2rem;
+	padding-bottom: 30px;
+}
+
+.signup-main input {
+	height: 35px;
+	width: 350px;
+}
+
+.signup-main label {
+	width: fit-content;
+}
+
+#checktoggle{
+	width: 15px;
+	height: 20px;
+	outline: 0;
+	border: 0;
+	transform: translate(0%, 10%);
+}
+
+.sign-submit {
+	transform: translate(0%, 20%);
+	margin: 0;
+}
+
+.signup-main p {
+	padding: 1.1rem 0.8rem;
+	font-size: 1.1rem;
+}
+
+.signup-main p a:link, .signup-main p a:visited {
+	color: green;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.signup-main p a:hover, .signup-main p a:active {
+	text-decoration: underline;
+}
+
+.error-msg {
+	color: rgb(226, 61, 61);
+	font-weight: 500;
+	text-align: center;
+}
