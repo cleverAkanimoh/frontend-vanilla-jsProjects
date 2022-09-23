@@ -1,5 +1,4 @@
 // lorem text
-
 let text = [
     `Getting Started: What You Need to Do to Get Going and Make Your First HTML
 Page. If you have always wanted to make your own Web page, but you were under the

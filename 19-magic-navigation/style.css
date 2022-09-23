@@ -1,0 +1,195 @@
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+	--clr: #222327;
+	/* dark shades of primary color*/
+	--clr-primary-1: hsl(205, 86%, 17%);
+	--clr-primary-2: hsl(205, 77%, 27%);
+	--clr-primary-3: hsl(205, 72%, 37%);
+	--clr-primary-4: hsl(205, 63%, 48%);
+	/* primary/main color */
+	--clr-primary-5: hsl(205, 78%, 60%);
+	/* lighter shades of primary color */
+	--clr-primary-6: hsl(205, 89%, 70%);
+	--clr-primary-7: hsl(205, 90%, 76%);
+	--clr-primary-8: hsl(205, 86%, 81%);
+	--clr-primary-9: hsl(205, 90%, 88%);
+	--clr-primary-10: hsl(205, 100%, 96%);
+	/* darkest grey - used for headings */
+	--clr-grey-1: hsl(209, 61%, 16%);
+	--clr-grey-2: hsl(211, 39%, 23%);
+	--clr-grey-3: hsl(209, 34%, 30%);
+	--clr-grey-4: hsl(209, 28%, 39%);
+	/* grey used for paragraphs */
+	--clr-grey-5: hsl(210, 22%, 49%);
+	--clr-grey-6: hsl(209, 23%, 60%);
+	--clr-grey-7: hsl(211, 27%, 70%);
+	--clr-grey-8: hsl(210, 31%, 80%);
+	--clr-grey-9: hsl(212, 33%, 89%);
+	--clr-grey-10: hsl(210, 36%, 96%);
+	--clr-white: #fff;
+	--clr-red-dark: hsl(360, 67%, 44%);
+	--clr-red-light: hsl(360, 71%, 66%);
+	--clr-green-dark: hsl(125, 67%, 44%);
+	--clr-green-light: hsl(125, 71%, 66%);
+	--clr-black: #222;
+	--ff-primary: "Roboto", sans-serif;
+	--ff-secondary: "Open Sans", sans-serif;
+	--transition: all 0.2s;
+	--spacing: 0.05rem;
+	--radius: 0.25rem;
+	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	--max-width: 1170px;
+	--fixed-width: 620px;
+}
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	font-family: var(--ff-secondary);
+	background: var(--clr);
+	color: var(--clr-grey-1);
+	line-height: 1.5;
+	font-size: 0.875rem;
+	text-transform: capitalize;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+div.navigation {
+	width: 350px;
+	height: 60px;
+	background: var(--clr-primary-9);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}
+
+div.navigation ul {
+	display: flex;
+	width: 300px;
+}
+
+div.navigation ul li {
+	position: relative;
+	list-style: none;
+	width: 70px;
+	height: 70px;
+	z-index: 1;
+}
+
+div.navigation ul li a {
+	text-decoration: none;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+div.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+  color: var(--clr);
+}
+
+div.navigation ul li.active a .icon {
+  transform: translateY(-27px);
+}
+
+div.navigation ul li a .text {
+  transition: var(--transition);
+  position: absolute;
+  color: var(--clr-grey-4);
+  font-weight: 400;
+  letter-spacing:  var(--spacing);
+  transform: translateY(25px);
+  opacity: 0;
+}
+
+div.navigation ul li.active a .text {
+  transform: translateY(15px);
+  opacity: 1;
+}
+
+.indicator{
+  position: absolute;
+  top: -40%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--clr-green-dark);
+  border: 6px solid var(--clr);
+  transition: var(--transition);
+}
+
+.indicator::before{
+  content: '';
+  position: absolute;
+  top: 38%;
+  left: -23px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -11px 0 0 var(--clr);
+}
+.indicator::after{
+  content: '';
+  position: absolute;
+  top: 38%;
+  right: -23px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: 0px -11px 0px 0 var(--clr);
+}
+
+.navigation ul li:nth-child(1).active ~ .indicator {
+  transform: translateX(calc(60px * 0))
+}
+.navigation ul li:nth-child(2).active ~ .indicator {
+  transform: translateX(calc(60px * 1))
+}
+.navigation ul li:nth-child(3).active ~ .indicator {
+  transform: translateX(calc(60px * 2))
+}
+.navigation ul li:nth-child(4).active ~ .indicator {
+  transform: translateX(calc(60px * 3))
+}
+.navigation ul li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(60px * 4))
+}
+
+@media screen and (min-width: 800px) {
+	body {
+		font-size: 1rem;
+	}
+}
