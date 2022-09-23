@@ -9,7 +9,6 @@ about.onclick = e => {
         btns.forEach((btn) => {
             btn.classList.remove('active');
             e.target.classList.add('active');
-            console.log(btns, btn);
         });
 
         // hide all articles then display all ids

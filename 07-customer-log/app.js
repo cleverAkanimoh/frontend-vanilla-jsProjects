@@ -1,5 +1,6 @@
 const createEl_btn = document.querySelector('.add');
 const table = document.querySelector('.data-table');
+const tableDataContainer = document.querySelector('.table-data-container');
 const cName = document.querySelector('#customerName');
 const cPhone = document.querySelector('#customerPhone');
 const cAccount = document.querySelector('#customerAccount');
@@ -39,102 +40,53 @@ for (let i = 0; i < form.length; i++) {
     }, false);
 }
 
-//creating new elements
+// creating new elements
 
-createEl_btn.onclick = () => {
+form[1].onsubmit = () => {
 
-    const cNameValue = cName.value.toUpperCase();
-    let cPhoneValue = cPhone.value;
-    const cAccountValue = cAccount.value;
+    let value = cName.value.toUpperCase();
+    let phone = cPhone.value;
+    let account = cAccount.value;
+    let id = Date().slice(0, 24);
+    let dateCreated = Date().slice(0, 24);
 
-    if (cNameValue === '') {
+    if (value === '') {
         alert('Text input must be entered...');
         cName.select();
         cName.focus();
-    } else if (cPhoneValue === '') {
+    } else if (phone === '') {
         alert('Text input must be entered...');
         cPhone.select();
         cPhone.focus();
-    } else if (isNaN(cPhoneValue)) {
+    } else if (isNaN(phone)) {
         alert('Phone Number input should contain only numbers!');
         cPhone.select();
         cPhone.focus();
-    } else if (cPhoneValue.length < 11) {
+    } else if (phone.length < 11) {
         alert('Phone Number input limit not reached!');
         cPhone.select();
         cPhone.focus();
-    } else if (cPhoneValue.length > 11) {
+    } else if (phone.length > 11) {
         alert('Phone Number input limit exceeded!');
         cPhone.select();
         cPhone.focus();
-    } else if (cAccountValue === '') {
+    } else if (account === '') {
         alert('Text input must be entered...')
         cAccount.select();
         cAccount.focus();
-    } else if (cAccountValue.length !== 10) {
+    } else if (account.length !== 10) {
         alert('Account Number is either incomplete or has exceeded it\'s limit!');
         cAccount.select();
         cAccount.focus();
-    } else if (isNaN(cAccountValue)) {
+    } else if (isNaN(account)) {
         alert('Account Number input should contain only numbers!');
         cAccount.select();
         cAccount.focus();
     } else {
 
-        //* tr element
-
-        let tableRow = document.createElement('tr');
-        tableRow.className = 'table-row';
-        table.appendChild(tableRow);
-
-        let serialNumber = document.createElement('td');
-        serialNumber.className = 'table-data';
-        serialNumber.textContent = count++;
-        tableRow.appendChild(serialNumber);
-
-        let tableData1 = document.createElement('td');
-        tableData1.className = 'table-data';
-        tableData1.textContent = cNameValue;
-        tableRow.appendChild(tableData1);
-
-        let tableData2 = document.createElement('td');
-        tableData2.className = 'table-data';
-        if (cPhoneValue.startsWith('0')) {
-            cPhoneValue = cPhoneValue.replace('0', '+234 ');
-        }
-        tableData2.textContent = cPhoneValue;
-        tableRow.appendChild(tableData2);
-
-        let tableData3 = document.createElement('td');
-        tableData3.className = 'table-data';
-        tableData3.textContent = cAccountValue;
-        tableRow.appendChild(tableData3);
-
-        let tableData4 = document.createElement('td');
-        tableData4.className = 'table-data';
-        let dateCreated = Date().slice(0, 24);
-        tableData4.innerHTML = dateCreated;
-        tableRow.appendChild(tableData4);
-
-        // create check button
-
-        let check = document.createElement('button');
-        check.type = 'checkbox';
-        check.className = 'check-btn';
-        check.title = 'check item';
-        check.innerHTML = '&check;';
-        tableRow.appendChild(check);
-
-        // create delete button
-        let del = document.createElement('button');
-        del.className = 'del-btn';
-        del.title = 'remove from list';
-        del.textContent = 'x';
-        tableRow.appendChild(del);
-
-        cName.value = "";
-        cPhone.value = "";
-        cAccount.value = "";
+        createTableData(id, value, phone, account, dateCreated);
+        addToLocalStorage(id, value, phone, account, dateCreated);
+        // setDefault();
     }
 }
 
@@ -142,58 +94,75 @@ createEl_btn.onclick = () => {
 
 table.ondblclick = (e) => {
 
-    let item = e.target;
-    let entry = item.parentElement;
+    let target = e.target;
+    let item = target.parentElement;
 
-    if (item.classList[0] === 'del-btn') {
-        entry.classList.add('fall');
+    id = item.dataset.id;
+
+    if (target.classList[0] === 'del-btn') {
+        item.classList.add('fall');
         setTimeout(
             () => {
-                entry.remove();
+                item.remove();
+                // window.location.reload();
             }, 250
-        )
+        );
+        setDefault();
+        removeFromLocalStorage(id);
     };
 
-    if (item.classList[0] === 'check-btn') {
-        entry.classList.toggle('completed');
+    if (target.classList[0] === 'check-btn') {
+        item.classList.toggle('completed');
     };
+};
+
+const setDefault = () => {
+    cName.value = "";
+    cPhone.value = "";
+    cAccount.value = "";
 }
+
 
 // search functionality
 
 searchInputs.forEach((input) => {
     input.oninput = () => {
+        searchFunctionality();
+    }
+
+    input.onchange = () => {
+        input.value = '';
+        searchFunctionality();
+    }
+    const searchFunctionality = () => {
+        let table_container = document.querySelector('.table-data-container')
         let tableValue = document.querySelectorAll('.table-row');
         let noSearchResult = document.querySelector('.search-not-found');
-        let searchQuery = input.value;
+        let searchQuery = input.value.toUpperCase();
+        let tRLength = table_container.children.length;
 
-        for (let i = 0; i < tableValue.length; i++) {
-            if (tableValue[i].textContent.toUpperCase().includes(searchQuery.toUpperCase())) {
-                tableValue[i].classList.remove('search-hidden');
+        tableValue.forEach((value) => {
+            if (value.textContent.includes(searchQuery)) {
+                value.classList.remove('search-hidden');
                 noSearchResult.style.display = 'none';
                 table.classList.remove('table-hidden');
-
-            } else if (!tableValue[i].textContent.toUpperCase().includes(searchQuery.toUpperCase())) {
-                tableValue[i].classList.add('search-hidden');
-                noSearchResult.style.display = 'block';
-                table.classList.add('table-hidden');
             } else {
-                tableValue[i].classList.add('search-hidden');
+                value.classList.add('search-hidden');
                 noSearchResult.style.display = 'none';
                 table.classList.remove('table-hidden');
-
             };
+        });
+        for (const iterator of object) {
+            
         }
-    }
+    };
 });
+
 
 // filter functionality
 
 filterOption.onclick = (e) => {
     let tableRow = document.querySelectorAll('.table-row');
-
-    console.log(tableRow);
-    console.log(e.target.value)
 
     tableRow.forEach((entry) => {
         switch (e.target.value) {
@@ -216,4 +185,111 @@ filterOption.onclick = (e) => {
                 break;
         }
     });
+};
+
+// local storage
+
+const addToLocalStorage = (id, value, phone, account, dateCreated) => {
+    let customer_log = { id, value, phone, account, dateCreated };
+    let items = getLocalStorage();
+
+    items.push(customer_log);
+    localStorage.setItem('log', JSON.stringify(items));
+};
+
+const removeFromLocalStorage = (id) => {
+    let items = getLocalStorage();
+    items = items.filter(item => {
+        if (item.id !== id) {
+            return item;
+        }
+    });
+    localStorage.setItem('log', JSON.stringify(items));
+};
+
+const editLocalStorage = (id, value, phone, account, dateCreated) => {
+    let items = getLocalStorage();
+    items = items.map(item => {
+        if (item.id === id) {
+            item.value = value;
+            item.phone = phone;
+            item.account = account;
+            item.dateCreated = dateCreated;
+        };
+        return item;
+    });
+    localStorage.setItem('log', JSON.stringify(items));
+};
+
+const getLocalStorage = () => {
+    return localStorage.getItem('log') ? JSON.parse(localStorage.getItem('log')) : [];
+};
+
+//* Setup Items
+
+const setUpItems = () => {
+    let items = getLocalStorage();
+    if (items.length > 0) {
+        items = items.forEach((item) => {
+            createTableData(item.id, item.value, item.phone, item.account, item.dateCreated);
+        });
+    };
+};
+window.addEventListener('DOMContentLoaded', setUpItems);
+
+// create elements
+
+const createTableData = (id, value, phone, account, dateCreated) => {
+
+    let tableRow = document.createElement('tr');
+    tableRow.className = 'table-row';
+    let attr = document.createAttribute('data-id');
+    attr.value = id;
+    tableRow.setAttributeNode(attr);
+    tableDataContainer.appendChild(tableRow);
+
+    let serialNumber = document.createElement('td');
+    serialNumber.className = 'table-data serial';
+    serialNumber.textContent = `#${count++}`;
+    tableRow.appendChild(serialNumber);
+
+    let tableData1 = document.createElement('td');
+    tableData1.className = 'table-data';
+    tableData1.textContent = value;
+    tableRow.appendChild(tableData1);
+
+    let tableData2 = document.createElement('td');
+    tableData2.className = 'table-data';
+    if (phone.startsWith('0')) {
+        phone = phone.replace('0', '+234 ');
+    }
+    tableData2.textContent = phone;
+    tableRow.appendChild(tableData2);
+
+    let tableData3 = document.createElement('td');
+    tableData3.className = 'table-data';
+    tableData3.textContent = account;
+    tableRow.appendChild(tableData3);
+
+    let tableData4 = document.createElement('td');
+    tableData4.className = 'table-data';
+    // dateCreated = Date().slice(0, 24);
+    tableData4.innerHTML = dateCreated;
+    tableRow.appendChild(tableData4);
+
+    // create check button
+
+    let check = document.createElement('button');
+    check.type = 'checkbox';
+    check.className = 'check-btn';
+    check.title = 'check item';
+    check.innerHTML = '&check;';
+    tableRow.appendChild(check);
+
+    // create delete button
+    let del = document.createElement('button');
+    del.className = 'del-btn';
+    del.title = 'remove from list';
+    del.textContent = 'x';
+    tableRow.appendChild(del);
 }

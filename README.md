@@ -23,14 +23,14 @@ project 16  -  grocery Bud
 project 17  -  slider
 project 18  -  Calculator
 project 19  -  magic Navigation
-project 20  -  Numbers
-project 21  -  Dark mode
-project 22  -  Filters
-project 23  -  Products
+project 20  -  Draggable Slider
+project 21  -  Owl Carousel
+project 22  -  auto-slider
+project 23  -  Dark mode
 project 24  -  Pagination
-project 25  -  Counters (OOP)
-project 26  -  Draggable Slider
-project 27  -  Owl Carousel
-project 28  -  Stripe SubMenus*
+project 25  -  Gallery (OOP)
+project 26  -  numbers
+project 27  -  Products
+project 28  -  Filters
 project 29  -  Cocktail
 project 30  -  Dad jokes

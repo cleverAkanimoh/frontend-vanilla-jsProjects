@@ -12,8 +12,8 @@ formSign.addEventListener('submit', (e) => {
     if (fname.value === '') {
         error.textContent = 'name input cannot be empty';
         fname.select();
-       
-    } else if ( pass1.value === '') {
+
+    } else if (pass1.value === '') {
         error.textContent = 'password input cannot be empty';
         pass1.select();
     } else if (pass1.value !== pass2.value) {
@@ -43,28 +43,16 @@ document.addEventListener('DOMContentLoaded', checkToggle);
 const saveLocalEntries = (entry1, entry2) => {
 
     //* check if already exits...
-    let entries;
-    if (localStorage.getItem('entries') === null) {
-        entries = [];
-    } else {
-        entries = JSON.parse(localStorage.getItem('entries'));
-    }
-
-    entries = {
-        entry1: entry1,
-        entry2: entry2,
-    };
-    localStorage.setItem('entries', JSON.stringify(entries));
+    let entries = {entry1,entry2};
+    let items = localStorage.getItem('entry') ? JSON.parse(localStorage.getItem('entry')) : [];
+    items.push(entries);
+    localStorage.setItem('entries', JSON.stringify(items));
 }
 
 const getEntries = () => {
     //* check if already exits...
     let entries;
-    if (localStorage.getItem('entries') === null) {
-        entries = [];
-    } else {
-        entries = JSON.parse(localStorage.getItem('entries'));
-    }
+    let items = localStorage.getItem('entry') ? JSON.parse(localStorage.getItem('entry')) : [];
 
     fname.value = entries.entry1;
     pass1.value = entries.entry2;
