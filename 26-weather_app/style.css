@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:"Roboto", sans-serif,"Open Sans";
+    color: #fff;
+    text-transform: capitalize;
+}
+
+#container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(to right, #ff416c, #ff4b4b);
+}
+
+#container #location {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container input {
+    height: 40px;
+    width: 150px;
+    margin: 0 15px;
+    padding: 0 10px;
+    border: 1px solid #fff;
+    outline: none;
+    background: #ffffff50;
+    font-size: 15px;
+    border-radius: 25px 12px;
+    color: #fff;
+}
+
+#container input::placeholder {
+    color: #e2e2e2;
+}
+
+#container input[type="submit"] {
+    cursor: pointer;
+    width: 100px;
+    background: #fff;
+    color: #ff4b2b;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+#tempIcon {
+    width: clamp(100px, 100%, 150px);
+    position: absolute;
+    bottom:30%;
+    left:41%;
+}
+
+#weatherCountry {
+    font-size: 34px;
+    position: absolute;
+    top: 40%;
+    right: 15%;
+}
+#temperature {
+    font-size: 35px;
+    position: absolute;
+    top: 34%;
+    left: 43%;
+}
+
+#temperature b {
+    color: #e2e2e290;
+}
+
+#weatherDescription {
+    font-size: 30px;
+    position: absolute;
+    bottom:23%;
+    left:43%;
+}
+
+#container ul {
+    position: absolute;
+    bottom:3%;
+    left:3%;
+}
+#container ul li {
+    margin: 20 0;
+    list-style: none;
+}
