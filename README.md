@@ -51,3 +51,5 @@ project 30  -  Js Password Generator
 10 Extra project  - Products
 11 Extra project  - Cocktail
 12 Extra project  - Dad jokes
+
+active link to view the web app functionality https://cleverakanimoh.github.io/frontend-vanilla-jsProjects/
